@@ -18,6 +18,16 @@ import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
+import model.Card;
+import model.Deck;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+
 public class RageCalc {
 
 	private JFrame frame;
@@ -46,7 +56,7 @@ public class RageCalc {
 	private JComboBox comboBox_5;
 	private JComboBox comboBox_6;
 	private JComboBox comboBox_7;
-	private JPanel panel;
+	private JPanel fourthcard;
 	private JLabel lblth;
 	private JTextField textField_4;
 	private JComboBox comboBox_8;
@@ -55,7 +65,7 @@ public class RageCalc {
 	private JComboBox comboBox_9;
 	private JComboBox comboBox_10;
 	private JComboBox comboBox_11;
-	private JPanel panel_1;
+	private JPanel fifthcard;
 	private JLabel lblth_1;
 	private JTextField textField_6;
 	private JComboBox comboBox_12;
@@ -64,13 +74,20 @@ public class RageCalc {
 	private JComboBox comboBox_13;
 	private JComboBox comboBox_14;
 	private JComboBox comboBox_15;
-	private JPanel panel_2;
+	private JPanel buttonframe;
 	private JButton btnCalculate;
 	private JTextField comboBox_16;
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	
+	private Deck deck = new Deck();
+	private Card card1 = new Card();
+	private Card card2 = new Card();
+	private Card card3 = new Card();
+	private Card card4 = new Card();
+	private Card card5 = new Card();
 
 	/**
 	 * Launch the application.
@@ -92,7 +109,17 @@ public class RageCalc {
 	 * Create the application.
 	 */
 	public RageCalc() {
+		SetupDeck();
 		initialize();
+	}
+	
+	private void SetupDeck(){
+		card1.name = "Sandy";
+		deck.AddCard(card1);
+		deck.AddCard(card2);
+		deck.AddCard(card3);
+		deck.AddCard(card4);
+		deck.AddCard(card5);
 	}
 
 	/**
@@ -114,7 +141,6 @@ public class RageCalc {
 		firstcard.add(lblCard);
 		
 		txtName = new JTextField();
-		txtName.setText("Name");
 		firstcard.add(txtName);
 		txtName.setColumns(10);
 		
@@ -226,91 +252,93 @@ public class RageCalc {
 		comboBox_7.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		thirdcard.add(comboBox_7);
 		
-		panel = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
-		frame.getContentPane().add(panel);
+		fourthcard = new JPanel();
+		FlowLayout fl_fourthcard = (FlowLayout) fourthcard.getLayout();
+		fl_fourthcard.setAlignment(FlowLayout.LEFT);
+		frame.getContentPane().add(fourthcard);
 		
 		lblth = new JLabel("4th");
-		panel.add(lblth);
+		fourthcard.add(lblth);
 		
 		textField_4 = new JTextField();
 		textField_4.setText("Name");
 		textField_4.setColumns(10);
-		panel.add(textField_4);
+		fourthcard.add(textField_4);
 		
 		comboBox_8 = new JComboBox(RoBRealm.values());
-		panel.add(comboBox_8);
+		fourthcard.add(comboBox_8);
 		
 		textField_5 = new JTextField();
 		textField_5.setText("ATK");
 		textField_5.setColumns(5);
-		panel.add(textField_5);
+		fourthcard.add(textField_5);
 		
 		lblSkill_2 = new JLabel("  Skill");
-		panel.add(lblSkill_2);
+		fourthcard.add(lblSkill_2);
 		
 		comboBox_9 = new JComboBox();
 		comboBox_9.setModel(new DefaultComboBoxModel(new String[] {"ATK", "Self ATK", "ATK/DEF", "Self ATK/DEF"}));
-		panel.add(comboBox_9);
+		fourthcard.add(comboBox_9);
 		
 		comboBox_10 = new JComboBox(RoBSkillRealm.values());
-		panel.add(comboBox_10);
+		fourthcard.add(comboBox_10);
 		
 		textField_11 = new JTextField();
 		textField_11.setText("%");
 		textField_11.setColumns(3);
-		panel.add(textField_11);
+		fourthcard.add(textField_11);
 		
 		comboBox_11 = new JComboBox();
 		comboBox_11.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		panel.add(comboBox_11);
+		fourthcard.add(comboBox_11);
 		
-		panel_1 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.LEFT);
-		frame.getContentPane().add(panel_1);
+		fifthcard = new JPanel();
+		FlowLayout fl_fifthcard = (FlowLayout) fifthcard.getLayout();
+		fl_fifthcard.setAlignment(FlowLayout.LEFT);
+		frame.getContentPane().add(fifthcard);
 		
 		lblth_1 = new JLabel("5th");
-		panel_1.add(lblth_1);
+		fifthcard.add(lblth_1);
 		
 		textField_6 = new JTextField();
 		textField_6.setText("Name");
 		textField_6.setColumns(10);
-		panel_1.add(textField_6);
+		fifthcard.add(textField_6);
 		
 		comboBox_12 = new JComboBox(RoBRealm.values());
-		panel_1.add(comboBox_12);
+		fifthcard.add(comboBox_12);
 		
 		textField_7 = new JTextField();
 		textField_7.setText("ATK");
 		textField_7.setColumns(5);
-		panel_1.add(textField_7);
+		fifthcard.add(textField_7);
 		
 		lblSkill_3 = new JLabel("  Skill");
-		panel_1.add(lblSkill_3);
+		fifthcard.add(lblSkill_3);
 		
 		comboBox_13 = new JComboBox();
 		comboBox_13.setModel(new DefaultComboBoxModel(new String[] {"ATK", "Self ATK", "ATK/DEF", "Self ATK/DEF"}));
-		panel_1.add(comboBox_13);
+		fifthcard.add(comboBox_13);
 		
 		comboBox_14 = new JComboBox(RoBSkillRealm.values());
-		panel_1.add(comboBox_14);
+		fifthcard.add(comboBox_14);
 		
 		textField_10 = new JTextField();
 		textField_10.setText("%");
 		textField_10.setColumns(3);
-		panel_1.add(textField_10);
+		fifthcard.add(textField_10);
 		
 		comboBox_15 = new JComboBox();
 		comboBox_15.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		panel_1.add(comboBox_15);
+		fifthcard.add(comboBox_15);
 		
-		panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2);
+		buttonframe = new JPanel();
+		frame.getContentPane().add(buttonframe);
 		
 		btnCalculate = new JButton("Calculate");
-		panel_2.add(btnCalculate);
+		buttonframe.add(btnCalculate);
+		initDataBindings();
 	}
-
+	protected void initDataBindings() {
+	}
 }

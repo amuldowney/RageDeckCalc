@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ import Utility.RoBUtilities.RoBRealm;
 public class Deck {
 	public int DECK_LIMIT = 5;
 	
-	private List<Card> cards;
+	private List<Card> cards = new ArrayList<Card>();
 	private Map<Card,Double> finalValues = new HashMap<Card,Double>();
 	private Map<RoBRealm,Double> finalBoosts = new HashMap<RoBRealm,Double>();
 	

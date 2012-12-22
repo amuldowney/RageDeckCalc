@@ -23,6 +23,10 @@ public class Card {
 		this.Realm = realm;
 	}
 	
+	public Card() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void SetSkill(List<RoBRealm> realmsEffected,int percent,int skillLevel){
 		this.skillAffects = realmsEffected;
 		this.skillPercentBoost = percent/100;
