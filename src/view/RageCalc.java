@@ -4,29 +4,20 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 
-import Utility.RoBUtilities.RoBRealm;
-import Utility.RoBUtilities.RoBSkillRealm;
+import utility.RoBUtilities.RoBRealm;
+import utility.RoBUtilities.RoBSkillRealm;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
 import model.Card;
 import model.Deck;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import org.jdesktop.beansbinding.BeanProperty;
-import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.Bindings;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 public class RageCalc {
 
@@ -81,13 +72,6 @@ public class RageCalc {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	
-	private Deck deck = new Deck();
-	private Card card1 = new Card();
-	private Card card2 = new Card();
-	private Card card3 = new Card();
-	private Card card4 = new Card();
-	private Card card5 = new Card();
 
 	/**
 	 * Launch the application.
@@ -109,17 +93,7 @@ public class RageCalc {
 	 * Create the application.
 	 */
 	public RageCalc() {
-		SetupDeck();
 		initialize();
-	}
-	
-	private void SetupDeck(){
-		card1.name = "Sandy";
-		deck.AddCard(card1);
-		deck.AddCard(card2);
-		deck.AddCard(card3);
-		deck.AddCard(card4);
-		deck.AddCard(card5);
 	}
 
 	/**
