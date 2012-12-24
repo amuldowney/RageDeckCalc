@@ -7,9 +7,7 @@ import java.util.Map.Entry;
 
 import javax.naming.SizeLimitExceededException;
 
-import utility.RoBUtilities.RoBRealm;
 
-import model.Card;
 import model.Deck;
 
 public class RoBDeckCalcCL {
@@ -27,17 +25,20 @@ public class RoBDeckCalcCL {
 		
 		System.out.println("average:"+avgATK);
 		
-		System.out.println(deck.toString());
 	}
 	
-	public static double FindAverageATK(CardFileReader cardFR ){
-		Deck deck = new Deck(cardFR);
+	public static double FindAverageATK(CardFileReader cardFR ) throws SizeLimitExceededException{
 		double avg = 0;
-		for(Entry<Double,int[]> poss : RoBUtilities.CreatePossibilitesTable().entrySet()){
-			avg += poss.getKey() * deck.GetATKForPossibility(poss.getValue());
+		System.out.println(RoBUtilities.CreatePossibilitesTable().entrySet().size());
+		for(Entry<int[],Double> poss : RoBUtilities.CreatePossibilitesTable().entrySet()){
+			System.out.println("Trying:"+RoBUtilities.PrintIntegerArray(poss.getKey()));
+			Deck deck = new Deck(cardFR);
+			double percentToHappen = (poss.getValue()/100);
+			double atkforpos = deck.GetATKForPossibility(poss.getKey());
+			avg += (percentToHappen*atkforpos);
 		}
 		
-		return avg / 11;//hardcoded to possibilitestable size
+		return avg;//hardcoded to possibilitestable size
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.naming.SizeLimitExceededException;
 
+import utility.CardFileReader;
 import utility.RoBUtilities;
 import utility.RoBUtilities.RoBRealm;
 
@@ -17,6 +18,11 @@ public class Deck {
 	private List<Card> cards = new LinkedList<Card>();
 	private List<Skill> skills = new LinkedList<Skill>();
 	
+	public Deck(CardFileReader cardFR) throws SizeLimitExceededException{
+		for(String cardInfo : cardFR.CardData.values()){
+			this.AddNewCard(cardInfo);
+		}
+	}
 	
 	public void AddNewCard(String cardInfo) throws SizeLimitExceededException{
 		String[] splitCardInfo = cardInfo.split(",");
@@ -73,6 +79,7 @@ public class Deck {
 			}
 		
 		}
+		System.out.println(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.ATKValue());
 		return this.ATKValue();
 	}
 	
