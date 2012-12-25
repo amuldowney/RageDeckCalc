@@ -1,18 +1,18 @@
 package model;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.naming.SizeLimitExceededException;
 
+import utility.BasicLogger;
 import utility.CardFileReader;
 import utility.RoBUtilities;
 import utility.RoBUtilities.RoBRealm;
 
 
 public class Deck {
+	
+	BasicLogger logger = BasicLogger.GetLogger();
 	public int DECK_LIMIT = 5;
 	
 	private List<Card> cards = new LinkedList<Card>();
@@ -79,7 +79,7 @@ public class Deck {
 			}
 		
 		}
-		System.out.println(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.ATKValue());
+		logger.log(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.ATKValue());
 		return this.ATKValue();
 	}
 	
@@ -88,7 +88,7 @@ public class Deck {
 		for(Card card : this.cards){
 			ret += card.ATK;
 		}
-		return ret;
+		return Math.ceil(ret);
 	}
 	
 }
