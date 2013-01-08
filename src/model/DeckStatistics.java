@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -19,6 +20,21 @@ public class DeckStatistics {
 	
 	
 	public DeckStatistics(){
+	}
+	
+	public void NewAverageAndSuch(CardFileReader cardFR) throws SizeLimitExceededException{
+		Deck deck = new Deck(cardFR);
+		
+		SkillProcConfigurationWizard x = new SkillProcConfigurationWizard(deck.skills);
+		
+		List<SkillProcSet> set = x.GenerateTable(deck.skills);
+		
+		double ctp  = 0.0;
+		for(SkillProcSet sps : set){
+			System.out.println(sps.toString());
+			ctp += sps.ChanceToProc;
+		}
+		System.out.println("Overall Chance :"+ctp);
 	}
 	
 	public double FindAverageATK(CardFileReader cardFR) throws SizeLimitExceededException{

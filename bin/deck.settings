@@ -19,8 +19,8 @@
 #
 #
 #Current Deck
-1st=man,Claymore Maid,17759,man,atk,13,5
-2nd=man,Claymore Maid,17759,man,atk,13,2
+1st=man,Claymore Maid,17759,man,atk,13,1
+2nd=man,Baymore Maid,17759,man,atk,13,1
 3rd=man,Phantom Thief Lupin,15584,all,atk,8,1
-4th=man,Dragon Slayer,17633,self,atk,25,2
+4th=man,Dragon Slayer,17633,self,atk,25,1
 5th=man,Master Samurai,17738

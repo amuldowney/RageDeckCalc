@@ -12,15 +12,17 @@ public class Card {
 	
 	private Skill skill;
 	private double boostPercent = 1;
+	private int positionInDeck;
 	
-	public Card(String realm,String name,int attack){
-		this(RoBRealm.valueOf(realm.toLowerCase()),name,attack);
+	public Card(String realm,String name,int attack,int cardpos){
+		this(RoBRealm.valueOf(realm.toLowerCase()),name,attack,cardpos);
 	}
 	
-	public Card(RoBRealm realm,String name,double attack){
+	public Card(RoBRealm realm,String name,double attack,int cardpos){
 		this.name = name;
 		this.ATK = attack;
 		this.Realm = realm;
+		this.positionInDeck = cardpos;
 	}
 	
 	public void SetSkill(Skill skill){
@@ -30,7 +32,6 @@ public class Card {
 	public void ApplySkill(Skill skillThatProcd){
 		this.boostPercent += skillThatProcd.GetBoostFactor(this.Realm);
 	}
-	
 	
 	
 	public String CardPrint(){
@@ -48,6 +49,10 @@ public class Card {
 	
 	public double GetFinalAttack(){
 		return this.ATK *this.boostPercent;
+	}
+	
+	public int GetPosition(){
+		return this.positionInDeck;
 	}
 
 }

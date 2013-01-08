@@ -9,24 +9,27 @@ public class Skill {
 	private double percentBoost;
 	private double skillLevel;
 	private EnumSet<RoBRealm> realmsAffected;
+	private int positionInDeck;
 	
 	public Card Card;
 	
 	public Boolean isSelfBoost = false;
 	
-	public Skill(){
+	public Skill(int cardpos){
 		//NegaSkill for a nonexistant skill
 		this.realmsAffected = EnumSet.noneOf(RoBRealm.class);//No realms
 		this.isSelfBoost = false;
 		this.percentBoost = 0;
 		this.skillLevel = 1;
+		this.positionInDeck = cardpos;
 	}
 
 	public Skill(double percentBoost, double skillLevel,
-			String realmsAffected) {
+			String realmsAffected,int cardpos) {
 		this.percentBoost = percentBoost;
 		this.skillLevel = skillLevel;
 		this.ParseRealmAffects(realmsAffected);
+		this.positionInDeck = cardpos;
 	}
 	
 	private double SkillLevelBoost(){
@@ -95,15 +98,14 @@ public class Skill {
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-		if(this.Card!=null){str.append(this.Card.toString()+" ");}
-		str.append(this.percentBoost);
-		for(RoBRealm realm : this.realmsAffected){
-			str.append(realm.toString());
-			str.append("/");
-		}
+//		if(this.Card!=null){str.append(this.Card.toString()+" ");}
+//		str.append(this.percentBoost);
+//		for(RoBRealm realm : this.realmsAffected){
+//			str.append(realm.toString());
+//			str.append("/");
+//		}
+		str.append(this.positionInDeck);
 		return str.toString();
 	}
-	
-	
 
 }

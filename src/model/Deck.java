@@ -17,27 +17,29 @@ public class Deck {
 	BasicLogger logger = BasicLogger.GetLogger();
 	
 	private List<Card> cards = new LinkedList<Card>();
-	private List<Skill> skills = new LinkedList<Skill>();
+	public List<Skill> skills = new LinkedList<Skill>();
 	
 	public Deck(CardFileReader cardFR) throws SizeLimitExceededException{
+		int cardpos = 1;
 		for(String cardInfo : cardFR.CardData.values()){
-			this.AddNewCard(cardInfo);
+			this.AddNewCard(cardInfo,cardpos);
+			cardpos++;
 		}
 	}
 	
-	public void AddNewCard(String cardInfo) throws SizeLimitExceededException{
+	public void AddNewCard(String cardInfo, int cardPosition) throws SizeLimitExceededException{
 		String[] splitCardInfo = cardInfo.split(",");
 		RoBRealm realm = Enum.valueOf(RoBRealm.class, splitCardInfo[0]);
 		String name = splitCardInfo[1];
 		double ATK = Double.parseDouble(splitCardInfo[2]);
 		
-		Skill skill = new Skill();
-		Card card = new Card(realm,name,ATK);
+		Skill skill = new Skill(cardPosition);
+		Card card = new Card(realm,name,ATK,cardPosition);
 		if(splitCardInfo.length ==7){//Skill Information
 			String realmsAffected = (splitCardInfo[3]);
 			int skillPercentBoost = Integer.parseInt(splitCardInfo[5].replace("%", ""));
 			int skillLevel = Integer.parseInt(splitCardInfo[6]);
-			skill = new Skill(skillPercentBoost,skillLevel,realmsAffected);
+			skill = new Skill(skillPercentBoost,skillLevel,realmsAffected,cardPosition);
 			skill.AttachCard(card);
 			
 		}
