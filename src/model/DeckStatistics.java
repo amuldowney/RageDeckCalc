@@ -1,9 +1,6 @@
 package model;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,7 +8,6 @@ import javax.naming.SizeLimitExceededException;
 
 import utility.BasicLogger;
 import utility.CardFileReader;
-import utility.RoBUtilities;
 
 public class DeckStatistics {
 	

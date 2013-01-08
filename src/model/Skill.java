@@ -1,10 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 
 import utility.RoBUtilities.RoBRealm;
-import utility.RoBUtilities.RoBSkillRealm;
 
 public class Skill {
 	
