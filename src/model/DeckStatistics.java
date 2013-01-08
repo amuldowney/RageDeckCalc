@@ -25,12 +25,12 @@ public class DeckStatistics {
 	public DeckStatistics(){
 	}
 	
-	public double FindAverageATK(CardFileReader cardFR ) throws SizeLimitExceededException{
+	public double FindAverageATK(CardFileReader cardFR) throws SizeLimitExceededException{
 		double avg = 0;
 		for(Entry<int[],Double> poss : this.CreatePossibilitesTable().entrySet()){
 			Deck deck = new Deck(cardFR);
 			double percentToHappen = (poss.getValue()/100);
-			double atkforpos = deck.GetATKForPossibility(poss.getKey());
+			double atkforpos = deck.GetATKForProcConfiguration(poss.getKey());
 			avg += Math.ceil(percentToHappen*atkforpos);
 			
 			minConfigurations.TryToAdd(poss.getKey(), atkforpos);
@@ -58,5 +58,4 @@ public class DeckStatistics {
 		
 		return possibilities;
 	}
-
 }

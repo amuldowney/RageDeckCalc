@@ -8,9 +8,10 @@ public class Card {
 	public String name;
 	
 	public RoBRealm Realm;
-	public double ATK;
+	public double ATK = 0;
 	
 	private Skill skill;
+	private double boostPercent = 1;
 	
 	public Card(String realm,String name,int attack){
 		this(RoBRealm.valueOf(realm.toLowerCase()),name,attack);
@@ -27,16 +28,26 @@ public class Card {
 	}
 	
 	public void ApplySkill(Skill skillThatProcd){
-		this.ATK *= skillThatProcd.GetBoostFactor(this.Realm);
+		this.boostPercent += skillThatProcd.GetBoostFactor(this.Realm);
+	}
+	
+	
+	
+	public String CardPrint(){
+		return this.name + ":"+this.ATK;
 	}
 	
 	public String toString(){
-		return this.name + ":"+this.ATK;
+		return this.name;
 	}
 
 	public void SelfBoost() {
-		this.ATK *= this.skill.SelfBoost();
+		this.boostPercent += this.skill.SelfBoost();
 		
+	}
+	
+	public double GetFinalAttack(){
+		return this.ATK *this.boostPercent;
 	}
 
 }

@@ -39,12 +39,20 @@ public class Skill {
 		}
 	}
 	
+	public double SkillProcChaneBoost(){
+		if(this.skillLevel < 10){
+			return (this.skillLevel -1);
+		}else {//Rank 10 skill gives 11%
+			return 11;
+		}
+	}
+	
 	protected double SelfBoost(){
 		return 1+this.SkillLevelBoost() + (this.percentBoost/100);
 	}
 	
 	public double GetBoostFactor(RoBRealm realm){
-		double ret = 1.0;
+		double ret = 0.0;
 		if(this.HasBoost(realm)){
 			ret = ret +(this.SkillLevelBoost() + (this.percentBoost/100));
 		}
@@ -72,7 +80,7 @@ public class Skill {
 		this.Card = card;
 	}
 	
-	public String toString(){
+	public String SkillPrint(){
 		StringBuilder str = new StringBuilder();
 		if(this.isSelfBoost){str.append("Self");}
 		for(RoBRealm realm : this.realmsAffected){
@@ -84,6 +92,17 @@ public class Skill {
 		str.append(" ");
 		str.append("lvl:"+this.skillLevel);
 		
+		return str.toString();
+	}
+	
+	public String toString(){
+		StringBuilder str = new StringBuilder();
+		if(this.Card!=null){str.append(this.Card.toString()+" ");}
+		str.append(this.percentBoost);
+		for(RoBRealm realm : this.realmsAffected){
+			str.append(realm.toString());
+			str.append("/");
+		}
 		return str.toString();
 	}
 	

@@ -12,8 +12,9 @@ import utility.RoBUtilities.RoBRealm;
 
 public class Deck {
 	
+	public static int DECK_LIMIT = 5;
+	
 	BasicLogger logger = BasicLogger.GetLogger();
-	public int DECK_LIMIT = 5;
 	
 	private List<Card> cards = new LinkedList<Card>();
 	private List<Skill> skills = new LinkedList<Skill>();
@@ -65,7 +66,7 @@ public class Deck {
 		return str.toString();
 	}
 	
-	public double GetATKForPossibility(int[] skillsThatProc){
+	public double GetATKForProcConfiguration(int[] skillsThatProc){
 		for(int procLocation : skillsThatProc){
 			procLocation--;//Get to zero index location
 			Skill skillThatProcd = this.skills.get(procLocation);
@@ -79,14 +80,14 @@ public class Deck {
 			}
 		
 		}
-		logger.log(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.ATKValue());
-		return this.ATKValue();
+		logger.log(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.FinalATKValue());
+		return this.FinalATKValue();
 	}
 	
-	public double ATKValue(){
+	public double FinalATKValue(){
 		double ret = 0;
 		for(Card card : this.cards){
-			ret += card.ATK;
+			ret += card.GetFinalAttack();
 		}
 		return Math.ceil(ret);
 	}
