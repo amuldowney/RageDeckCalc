@@ -20,7 +20,7 @@ public class RoBDeckCalcCL {
 		
 		File firstCardFile = new File(args[0]);
 		
-		File secondCardFile = new File(args[1]);
+		//File secondCardFile = new File(args[1]);
 		
 		CardFileReader cardFR = new CardFileReader(firstCardFile);
 		DeckStatistics deckStats = new DeckStatistics();
