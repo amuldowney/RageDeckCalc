@@ -68,21 +68,19 @@ public class Deck {
 		return str.toString();
 	}
 	
-	public double GetATKForProcConfiguration(int[] skillsThatProc){
-		for(int procLocation : skillsThatProc){
-			procLocation--;//Get to zero index location
-			Skill skillThatProcd = this.skills.get(procLocation);
+	public double GetATKForProcConfiguration(SkillProcSet skillsThatProc){
+		for(Skill skillThatProcd : skillsThatProc.skills){
 			
-			if(!skillThatProcd.isSelfBoost){
+			if(skillThatProcd.isSelfBoost){
+				skillThatProcd.Card.SelfBoost();
+			}else{
 				for(Card card : this.cards){
 					card.ApplySkill(skillThatProcd);
 				}	
-			}else{
-				skillThatProcd.Card.SelfBoost();
 			}
 		
 		}
-		logger.log(RoBUtilities.PrintIntegerArray(skillsThatProc)+":"+this.FinalATKValue());
+		logger.log(skillsThatProc.PrintShortHand()+":"+this.FinalATKValue());
 		return this.FinalATKValue();
 	}
 	

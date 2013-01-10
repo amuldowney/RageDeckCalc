@@ -5,7 +5,6 @@ import java.util.List;
 
 public class SkillProcConfigurationWizard {
 	
-	private static double PROC_SUCESS_REDUCTION = 0.5;//skill procs drop by half when another proc has occured
 	private static double DUPLICATE_PROC_SUCESS_REDUCTION = 0.5;//skill procs drop by half when a duplicate proc has occured
 	
 	
@@ -16,9 +15,9 @@ public class SkillProcConfigurationWizard {
 		this.skills = skills;
 	}
 	
-	public List<SkillProcSet> GenerateTable(List<Skill> skills){
+	public List<SkillProcSet> GenerateTable(){
 		
-		List<SkillProcSet> x  = substep(new SkillProcSet(skills.get(0)),skills.size(),2);
+		List<SkillProcSet> x  = substep(new SkillProcSet(this.skills.get(0)),this.skills.size(),2);
 		return x;
 	}
 	//Get skill list
@@ -37,7 +36,7 @@ public class SkillProcConfigurationWizard {
 			return x;
 		}
 		else{
-			double newSkillProcChance = (skillproc.ChanceToProc * SkillProcConfigurationWizard.PROC_SUCESS_REDUCTION)+(this.skills.get(currentdepth-1).SkillProcChaneBoost());
+			double newSkillProcChance = skillproc.GetChanceToAddNewSkillProc()+(this.skills.get(currentdepth-1).SkillProcChaneBoost());
 			int duplicates = this.duplicates(skillproc, this.skills.get(currentdepth-1));
 			if(duplicates > 0){newSkillProcChance *= (SkillProcConfigurationWizard.DUPLICATE_PROC_SUCESS_REDUCTION / duplicates);}
 			
@@ -60,7 +59,7 @@ public class SkillProcConfigurationWizard {
 	private int duplicates(SkillProcSet setOfSkills, Skill skill){
 		int ret = 0;
 		for(Skill already : setOfSkills.skills){
-			if(skill.toString() == already.toString()){
+			if(skill.toString().compareTo(already.toString()) == 0){
 				ret++;
 			}
 		}

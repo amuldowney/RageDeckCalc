@@ -27,7 +27,7 @@ public class DeckStatistics {
 		
 		SkillProcConfigurationWizard x = new SkillProcConfigurationWizard(deck.skills);
 		
-		List<SkillProcSet> set = x.GenerateTable(deck.skills);
+		List<SkillProcSet> set = x.GenerateTable();
 		
 		double ctp  = 0.0;
 		for(SkillProcSet sps : set){
@@ -39,21 +39,24 @@ public class DeckStatistics {
 	
 	public double FindAverageATK(CardFileReader cardFR) throws SizeLimitExceededException{
 		double avg = 0;
-		for(Entry<int[],Double> poss : this.CreatePossibilitesTable().entrySet()){
-			Deck deck = new Deck(cardFR);
-			double percentToHappen = (poss.getValue()/100);
-			double atkforpos = deck.GetATKForProcConfiguration(poss.getKey());
-			avg += Math.ceil(percentToHappen*atkforpos);
+		Deck deck = new Deck(cardFR);
+		SkillProcConfigurationWizard x = new SkillProcConfigurationWizard(deck.skills);
+		List<SkillProcSet> set = x.GenerateTable();
+		for(SkillProcSet poss : set){
+			deck = new Deck(cardFR);
+			double percentToHappen = (poss.ChanceToProc);
+			double atkforpos = deck.GetATKForProcConfiguration(poss);
+			avg += Math.ceil((percentToHappen/100)*atkforpos);
 			
-			minConfigurations.TryToAdd(poss.getKey(), atkforpos);
-			maxConfigurations.TryToAdd(poss.getKey(), atkforpos);
+			minConfigurations.TryToAdd(poss, atkforpos);
+			maxConfigurations.TryToAdd(poss, atkforpos);
 		}
 		logger.log("Best Proc Configurations:\n"+maxConfigurations.toString());
 		logger.log("Worst Proc Configurations:\n"+minConfigurations.toString());
 		return avg;
 	}
 	
-	private Map<int[],Double> CreatePossibilitesTable(){
+	private Map<int[],Double> CreateBasicPossibilitesTable(){//Assumes no duplicates
 		HashMap<int[],Double> possibilities = new HashMap<int[],Double>();
 		
 		possibilities.put(new int[] {1},6.25);

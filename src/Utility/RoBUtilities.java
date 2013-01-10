@@ -2,7 +2,10 @@ package utility;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import model.Skill;
 
 public class RoBUtilities {
 	
@@ -13,10 +16,11 @@ public class RoBUtilities {
 		man,god,demon,self
 	}
 	
-	public static String PrintIntegerArray(int[] array){
+	public static String PrintSkillArray(List<Skill> array){
 		StringBuilder str = new StringBuilder();
 		str.append("[");
-		for(int num : array){
+		for(Skill skill : array){
+			int num = skill.PositionInDeck();
 			str.append(num);
 			str.append(",");
 		}

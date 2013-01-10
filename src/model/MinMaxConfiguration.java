@@ -15,7 +15,7 @@ public class MinMaxConfiguration {
 	
 	public double ATK;
 	
-	private List<int[]> configurations = new ArrayList<int[]>();
+	private List<SkillProcSet> configurations = new ArrayList<SkillProcSet>();
 	
 	
 	public MinMaxConfiguration(ConfigurationType type){
@@ -29,35 +29,38 @@ public class MinMaxConfiguration {
 	}
 	
 	
-	public void TryToAdd(int[] pos, double atk){
+	public void TryToAdd(SkillProcSet skillList, double atk){
 		if(type == ConfigurationType.max){
 			if(atk >= this.ATK){
-				this.SetConfig(pos, atk);
+				this.SetConfig(skillList, atk);
 			}
 		}if(type == ConfigurationType.min){
 			if(atk <= this.ATK){
-				this.SetConfig(pos, atk);
+				this.SetConfig(skillList, atk);
 			}
 		}
 		
 	}
 	
-	private void SetConfig(int[] pos, double atk){
+	private void SetConfig(SkillProcSet sps, double atk){
 		if(atk != this.ATK){
-			this.configurations = new ArrayList<int[]>();
+			this.configurations = new ArrayList<SkillProcSet>();
 		}
 		this.ATK = atk;
-		this.configurations.add(pos);
-		
+		this.configurations.add(sps);
 	}
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-		for(int[] config : this.configurations){
-			str.append(RoBUtilities.PrintIntegerArray(config));
+		double configsChanceToProc = 0.0;
+		for(SkillProcSet config : this.configurations){
+			configsChanceToProc += config.ChanceToProc;
+			str.append(RoBUtilities.PrintSkillArray(config.skills));
 			str.append("\n");
 		}
 		str.append("ATK:"+this.ATK);
+		str.append("\n");
+		str.append("Chance: "+Math.ceil(configsChanceToProc)+"%");
 		str.append("\n");
 		return str.toString();
 		

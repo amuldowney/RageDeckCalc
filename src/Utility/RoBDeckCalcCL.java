@@ -22,10 +22,10 @@ public class RoBDeckCalcCL {
 		
 		CardFileReader cardFR = new CardFileReader(firstCardFile);
 		DeckStatistics deckStats = new DeckStatistics();
-		deckStats.NewAverageAndSuch(cardFR);
-		//double avgATK = deckStats.FindAverageATK(cardFR);
+		//deckStats.NewAverageAndSuch(cardFR);
+		double avgATK = deckStats.FindAverageATK(cardFR);
 		
-		//System.out.println("average:"+avgATK);
+		System.out.println("average:"+avgATK);
 		
 	}
 

@@ -55,7 +55,7 @@ public class Skill {
 	public double GetBoostFactor(RoBRealm realm){
 		double ret = 0.0;
 		if(this.HasBoost(realm)){
-			ret = ret +(this.SkillLevelBoost() + (this.percentBoost/100));
+			ret += (this.SkillLevelBoost() + (this.percentBoost/100));
 		}
 		return ret;
 	}
@@ -98,14 +98,17 @@ public class Skill {
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-//		if(this.Card!=null){str.append(this.Card.toString()+" ");}
-//		str.append(this.percentBoost);
-//		for(RoBRealm realm : this.realmsAffected){
-//			str.append(realm.toString());
-//			str.append("/");
-//		}
-		str.append(this.positionInDeck);
+		if(this.Card!=null){str.append(this.Card.toString()+" ");}
+		str.append(this.percentBoost);
+		for(RoBRealm realm : this.realmsAffected){
+			str.append(realm.toString());
+			str.append("/");
+		}
 		return str.toString();
+	}
+	
+	public int PositionInDeck(){
+		return this.positionInDeck;
 	}
 
 }
