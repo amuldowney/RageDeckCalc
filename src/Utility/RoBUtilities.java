@@ -10,12 +10,9 @@ import model.Skill;
 public class RoBUtilities {
 	
 	public enum RoBRealm {
-	man,god,demon
+		man,god,demon
 	}
-	public enum RoBSkillRealm {
-		man,god,demon,self
-	}
-	
+
 	public static String PrintSkillArray(List<Skill> array){
 		StringBuilder str = new StringBuilder();
 		str.append("[");
